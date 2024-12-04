@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload de Foto</title>
+    <!-- Fontes e Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Corpo com fundo suave */
+        body {
+            background: linear-gradient(to right, #f0f4f8, #d6e2e9);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Estilo da Navbar */
+        .navbar {
+            background-color: #34495e;
+        }
+
+        .navbar-brand,
+        .nav-link {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        /* Título da página */
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 40px;
+        }
+
+        /* Formulário de upload */
+        .form-container {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilo do botão de envio */
+        button[type="submit"] {
+            background-color: #3498db;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            color: #fff;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+
+        /* Input de arquivo */
+        input[type="file"] {
+            padding: 10px;
+            border: 2px solid #34495e;
+            border-radius: 5px;
+            width: 100%;
+            background-color: #ecf0f1;
+            font-size: 1rem;
+        }
+
+        input[type="file"]:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        /* Estilo para os campos do formulário */
+        .form-group label {
+            font-weight: 500;
+            font-size: 1rem;
+            color: #34495e;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        /* Mensagens de erro ou sucesso */
+        .alert {
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="{% url 'index' %}">Album de Família</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'index' %}">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'galeria' %}">Galeria</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'upload_foto' %}">Upload de Foto</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Formulário de Upload -->
+    <div class="container mt-5">
+        <div class="form-container">
+            <h1 class="text-center">Envie sua Foto</h1>
+            
+            <!-- Caso haja mensagem de sucesso ou erro -->
+            {% if messages %}
+                <div class="alert alert-info">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_imagem">Selecione uma foto</label>
+                    {{ form.imagem }}
+                </div>
+                <div class="form-group">
+                    <label for="id_descricao">Descrição (opcional)</label>
+                    {{ form.descricao }}
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Enviar Foto</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts para Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

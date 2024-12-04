@@ -1,0 +1,143 @@
+<!-- templates/galeria.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+/* Cor de fundo da página inteira com gradiente suave */
+body {
+    background: linear-gradient(to top, #ecf0f1, #bdc3c7); /* Gradiente suave de cinza claro */
+    font-family: 'Arial', sans-serif; /* Fonte padrão */
+}
+
+/* Estilo do Carrossel */
+.carousel-inner {
+    max-height: 500px; /* Limita a altura do carrossel */
+    overflow: hidden;
+    border-radius: 10px; /* Bordas arredondadas no carrossel */
+    background: linear-gradient(to bottom, #34495e, #2c3e50); /* Gradiente de cinza escuro para azul escuro */
+}
+
+/* Imagens do carrossel */
+.carousel-item img {
+    object-fit: contain; /* Ajusta a imagem para caber no carrossel sem cortar */
+    width: 100%; /* A largura vai ocupar 100% do carrossel */
+    height: auto; /* A altura será ajustada proporcionalmente */
+    max-height: 500px; /* Limita a altura da imagem */
+    border-radius: 15px; /* Bordas arredondadas nas imagens */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra sutil nas imagens */
+    transition: transform 0.5s ease, opacity 0.5s ease; /* Transições suaves nas imagens */
+}
+
+/* Transições nas imagens do carrossel */
+.carousel-item {
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+/* Legendas do carrossel */
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.6); /* Fundo escuro translúcido para melhor legibilidade */
+    border-radius: 8px; /* Bordas arredondadas nas legendas */
+    padding: 15px;
+    font-family: 'Lora', serif; /* Fonte elegante */
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #fff; /* Texto claro */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* Sombra sutil no texto */
+    opacity: 0; /* Inicialmente invisível */
+    transition: opacity 0.5s ease-in-out; /* Efeito suave para as legendas */
+}
+
+.carousel-item.active .carousel-caption {
+    opacity: 1; /* Visível apenas quando o item está ativo */
+}
+
+/* Estilo da legenda para um toque mais elegante */
+.elegant-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    color: #fff;
+    font-weight: 500;
+    line-height: 1.4; /* Aumenta o espaçamento entre linhas para melhor leitura */
+}
+
+/* Estilo para as setas de navegação do carrossel */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(255, 255, 255, 0.7);  /* Cor branca com transparência */
+    border-radius: 50%;  /* Botões circulares */
+    width: 40px;  /* Tamanho das setas */
+    height: 40px;  /* Tamanho das setas */
+    background-size: 50%;  /* Ajusta o tamanho do ícone */
+    transition: background-color 0.3s ease, transform 0.3s ease;  /* Transições suaves */
+}
+
+
+/* Estilo para as setas de navegação do carrossel */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(255, 255, 255, 0.7);  /* Cor branca com transparência */
+    border-radius: 50%;  /* Botões circulares */
+    width: 40px;  /* Tamanho das setas */
+    height: 40px;  /* Tamanho das setas */
+    background-size: 50%;  /* Ajusta o tamanho do ícone */
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;  /* Transições suaves */
+}
+
+/* Efeito hover nas setas (anterior e seguinte) */
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+    background-color: rgba(255, 255, 255, 1);  /* Cor de fundo mais forte no hover */
+    transform: scale(1.2);  /* Aumenta o tamanho da seta no hover */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);  /* Adiciona sombra suave para dar destaque */
+}
+
+/* Estilo das setas no estado de foco para acessibilidade */
+.carousel-control-prev:focus,
+.carousel-control-next:focus {
+    outline: none;  /* Remove o contorno padrão de foco */
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);  /* Foco com sombra suave */
+}
+
+
+
+</style>
+
+<div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    {% for foto in fotos %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <img src="{{ foto.imagem.url }}" class="d-block w-100" alt="{{ foto.descricao }}">
+        <div class="carousel-caption d-none d-md-block">
+          <p class="elegant-text">{{ foto.descricao }}</p>
+        </div>
+      </div>
+    {% empty %}
+      <div class="carousel-item active">
+        <img src="caminho/para/imagem_default.jpg" class="d-block w-100" alt="Imagem padrão">
+      </div>
+    {% endfor %}
+  </div>
+  
+  <!-- Controles de navegação -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'ArrowLeft') {
+      $('#carouselExample').carousel('prev');
+    } else if (event.key === 'ArrowRight') {
+      $('#carouselExample').carousel('next');
+    }
+  });
+</script>
+{% endblock %}

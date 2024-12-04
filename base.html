@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Album de Familia{% endblock %}</title>
+    
+        <!-- Adicionar o CSS do Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Adicionar o JS do Bootstrap (necessário para o carrossel) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        /* Estilo para a seção de capa */
+        .cover-photo {
+            width: 100%;
+            height: 500px;  /* Tamanho da seção */
+            background-image: url('media/fotos/capa.jpg');  /* Substitua com o link da sua imagem */
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        /* Definindo uma fonte elegante */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap');
+
+        /* Fonte elegante para o título */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap');
+
+/* Estilo para o título principal */
+.elegant-title {
+    font-family: 'Playfair Display', serif;  /* Fonte elegante */
+    font-size: 3rem;  /* Tamanho grande */
+    color: #8e44ad;  /* Cor elegante - Bordô suave */
+    text-transform: uppercase;  /* Tornar o texto em maiúsculas */
+    letter-spacing: 2px;  /* Espaçamento entre as letras */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);  /* Sombra suave */
+}
+
+/* Estilo para o subtítulo (JOSUÉ E ISABELLE) */
+.elegant-subtitle {
+    font-family: 'Playfair Display', serif;  /* Fonte serifada */
+    font-size: 3.5rem;  /* Tamanho grande para destaque */
+    font-weight: 700;  /* Peso forte */
+    color: #2c3e50;  /* Cor escura e sofisticada (azul petróleo) */
+    text-transform: uppercase;  /* Maiúsculas para o efeito de destaque */
+    text-align: center;  /* Garantir que está centralizado */
+    margin-top: 20px;
+    letter-spacing: 5px;  /* Espaçamento mais largo */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);  /* Sombra suave */
+    transition: all 0.3s ease;  /* Transição suave para o efeito de hover */
+}
+
+/* Efeito de hover - quando o usuário passa o mouse */
+.elegant-subtitle:hover {
+    color: #F0F8FF;  /* Mudar a cor para um tom de vermelho sutil */
+    text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.4), 0 0 35px rgba(255, 0, 0, 1);  /* Sombra de brilho mais forte */
+    transform: scale(1.1);  /* Aumentar o tamanho do texto */
+}
+
+/* Estilo para o parágrafo */
+.elegant-paragraph {
+    font-family: 'Roboto', sans-serif;  /* Fonte moderna */
+    font-size: 1.2rem;  /* Tamanho confortável */
+    color: #7f8c8d;  /* Cinza suave para o texto */
+    line-height: 1.6;  /* Maior espaçamento entre as linhas */
+    max-width: 800px;  /* Largura máxima para evitar que o texto fique muito largo */
+    margin: 0 auto;  /* Centralizar o parágrafo */
+    font-weight: 400;
+}
+
+
+
+        /* Estilo para o footer */
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{% url 'index' %}">Album</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'index' %}">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'galeria' %}">Galeria</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'upload_foto' %}">Upload de Foto</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+   
+
+    
+
+     <!-- Seção com imagem de fundo -->
+    <div class="cover-photo">
+        <!-- Conteúdo da página -->
+        <div class="container mt-5">
+            {% block content %}{% endblock %}
+        </div>
+
+    </div>
+
+   
+
+
+    <!-- Scripts para Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
